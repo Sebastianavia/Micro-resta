@@ -1,15 +1,9 @@
-
-"""
-Created on Mon Apr  6 15:07:08 2020
-
-@author: santoyo-yo Cristan Patiño
-"""
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 
 app = Flask(__name__)
-cors = CORS(app, origins='*')
+cors = CORS(app)
 
 @app.route('/api/resta', methods=['POST'])
 def resta():    
@@ -25,9 +19,10 @@ if __name__ == '__main__':
 
 
 
+#curl -X POST -H "Content-Type: application/json" -d '{"n1": 10, "n2": 5}' http://calculadora/resta/api/resta
 
-curl -X POST -H "Content-Type: application/json" -d '{"n1": 10, "n2": 5}' http://calculadora/resta/api/resta
+#192.168.49.2  
 
-192.168.49.2  
+#curl --resolve "calculadora:80:$( minikube ip )" -i http://calculadora
 
-curl --resolve "calculadora:80:$( minikube ip )" -i http://calculadora
+#cors = CORS(app, origins='*')

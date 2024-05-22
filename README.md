@@ -12,7 +12,7 @@ Este código es un microservicio que realiza la operación de resta utilizando F
 
 ### Inicialización de la Aplicación:
 
-Se crea una instancia de Flask llamada app.
+Se crea una instancia de Flask  llamada app.
 Se habilita CORS en la aplicación para permitir solicitudes desde cualquier origen.
 Ruta /api/resta:
 

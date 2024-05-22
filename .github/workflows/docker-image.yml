@@ -1,4 +1,4 @@
-name: restCI
+name: restaCI
 
 on:
   push:
@@ -27,3 +27,23 @@ jobs:
 
     - name: Push into Docker-hub
       run: docker push sebastiannavia/micro-calculadora-resta:0.0.${{ github.run_number }}
+
+    - name: Check out the Deployment_ToDo_App repository
+      uses: actions/checkout@v2
+      with:
+        repository: Sebastianavia/Calculadora-CD
+        ref: "master"
+        path: deployment_repo
+        token: ${{ secrets.REPO_TOKEN }}
+        fetch-depth: 0
+        persist-credentials: true
+
+    - name: Update values.yml with new tag
+      run: |
+        cd deployment_repo/resta
+        sed -i 's/tag: .*/tag: "0.0.${{ github.run_number }}"/' values.yaml
+        git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+        git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+        git add values.yaml
+        git commit -m "Update image tag to 0.0.${{ github.run_number }}"
+        git push
